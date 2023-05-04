@@ -1,15 +1,20 @@
 # coding: utf-8
 import sys, os
-sys.path.append(os.pardir)  # 为了导入父目录的文件而进行的设定
+parent_dir = os.path.abspath(os.getcwd())
+sys.path.append(parent_dir)
 import numpy as np
 from dataset.mnist import load_mnist
 from two_layer_net import TwoLayerNet
+
+# test
+print(sys.path)
 
 # 读入数据
 (x_train, t_train), (x_test, t_test) = load_mnist(normalize=True, one_hot_label=True)
 
 network = TwoLayerNet(input_size=784, hidden_size=50, output_size=10)
 
+# mini-batch
 x_batch = x_train[:3]
 t_batch = t_train[:3]
 

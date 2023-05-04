@@ -1,6 +1,7 @@
 # coding: utf-8
 import sys, os
-sys.path.append(os.pardir)  # 为了导入父目录的文件而进行的设定
+parent_dir = os.path.abspath(os.getcwd())
+sys.path.append(parent_dir)
 import numpy as np
 from common.layers import *
 from common.gradient import numerical_gradient
@@ -61,11 +62,11 @@ class TwoLayerNet:
         self.loss(x, t)
 
         # backward
-        dout = 1
+        dout = 1 # identity element
         dout = self.lastLayer.backward(dout)
         
         layers = list(self.layers.values())
-        layers.reverse()
+        layers.reverse() # Last layer, first to derive
         for layer in layers:
             dout = layer.backward(dout)
 
